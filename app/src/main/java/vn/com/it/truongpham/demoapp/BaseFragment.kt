@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_toolbar.*
 
 
 
-abstract class BaseFragment : Fragment() ,OnBackPressed {
+abstract class BaseFragment : Fragment()  {
     //https://medium.com/@Wingnut/onbackpressed-for-fragments-357b2bf1ce8e
 
     var viewbase: View? = null
@@ -37,8 +37,13 @@ abstract class BaseFragment : Fragment() ,OnBackPressed {
 
     abstract fun getLayout(): Int
 
-    fun setTitle(title: String) {
-        tvTitle.text = title
+    fun setTitle(title: String="",isVisible:Boolean) {
+        if(isVisible) {
+            tvTitle.visibility=View.VISIBLE
+            tvTitle.text = title
+        }else{
+            tvTitle.visibility=View.GONE
+        }
     }
 
     fun hideBottomNavigationView() {
@@ -60,16 +65,6 @@ abstract class BaseFragment : Fragment() ,OnBackPressed {
 
     override fun onResume() {
         super.onResume()
-        Log.d("BaseFragment", "onResume()")
-    }
-
-
-    override fun onBackPressedFragment() {
-        val fragments = fragmentManager!!.getFragments()
-        for (f in fragments) {
-            if (f != null && f is BaseFragment)
-                (f as BaseFragment).onBackPressedFragment()
-        }
     }
 
     fun onBackPressed(){

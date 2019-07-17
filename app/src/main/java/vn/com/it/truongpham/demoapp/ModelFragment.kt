@@ -27,6 +27,7 @@ class ModelFragment : BaseFragment() {
         message.setOnClickListener {
             FragmentUtils.replaceFragment(FragmentDetail(), fragmentManager!!, R.id.model)
         }
+        setTitle("ModelFragment",true)
         showImageBack()
 
     }

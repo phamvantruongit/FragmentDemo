@@ -11,7 +11,7 @@ class FragmentOne : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setTitle("Fragment One")
+        setTitle("Fragment One",true)
 
 
     }

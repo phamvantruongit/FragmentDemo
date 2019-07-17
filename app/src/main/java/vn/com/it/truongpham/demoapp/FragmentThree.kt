@@ -39,6 +39,8 @@ class FragmentThree : BaseFragment()  {
                 }
             }
         }
+
+        setTitle("",false)
     }
 
 
