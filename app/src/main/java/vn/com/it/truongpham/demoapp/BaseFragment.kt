@@ -1,7 +1,6 @@
 package vn.com.it.truongpham.demoapp
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,16 +14,16 @@ import kotlinx.android.synthetic.main.fragment_toolbar.*
 abstract class BaseFragment : Fragment()  {
     //https://medium.com/@Wingnut/onbackpressed-for-fragments-357b2bf1ce8e
 
-    var viewbase: View? = null
-    lateinit var navi: BottomNavigationView
+    var view_base_fragment: View? = null
+    lateinit var navigation: BottomNavigationView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        viewbase = inflater.inflate(getLayout(), container, false)
+        view_base_fragment = inflater.inflate(getLayout(), container, false)
 
-        navi = activity!!.findViewById(R.id.navigation) as BottomNavigationView
+        navigation = activity!!.findViewById(R.id.navigation) as BottomNavigationView
 
 
-        return viewbase
+        return view_base_fragment
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -47,11 +46,11 @@ abstract class BaseFragment : Fragment()  {
     }
 
     fun hideBottomNavigationView() {
-        navi.visibility = View.GONE
+        navigation.visibility = View.GONE
     }
 
     fun showBottomNavigationView() {
-        navi.visibility = View.VISIBLE
+        navigation.visibility = View.VISIBLE
     }
 
     fun showImageBack(){
