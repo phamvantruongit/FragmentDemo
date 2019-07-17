@@ -12,19 +12,26 @@ import kotlinx.android.synthetic.main.fragment_toolbar.*
 
 
 
-abstract class BaseFragment : Fragment() {
+abstract class BaseFragment : Fragment() ,OnBackPressed {
     //https://medium.com/@Wingnut/onbackpressed-for-fragments-357b2bf1ce8e
 
     var viewbase: View? = null
     lateinit var navi: BottomNavigationView
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewbase = inflater.inflate(getLayout(), container, false)
 
-        navi = activity!!.findViewById<BottomNavigationView>(R.id.navigation)
+        navi = activity!!.findViewById(R.id.navigation) as BottomNavigationView
+
+
         return viewbase
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        ivback.setOnClickListener {
+            onBackPressed()
+        }
     }
 
 
@@ -42,13 +49,10 @@ abstract class BaseFragment : Fragment() {
         navi.visibility = View.VISIBLE
     }
 
-    fun addFragment(fragment: Fragment, container: Int, fragmentDetail: String) {
-
-        var fragmentTransaction: androidx.fragment.app.FragmentTransaction = childFragmentManager!!.beginTransaction()
-        fragmentTransaction.replace(container, fragment ,fragmentDetail).addToBackStack(fragmentDetail)
-            .commit()
-
+    fun showImageBack(){
+        ivback.visibility=View.VISIBLE
     }
+
 
     override fun onStart() {
         super.onStart()
@@ -57,6 +61,19 @@ abstract class BaseFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         Log.d("BaseFragment", "onResume()")
+    }
+
+
+    override fun onBackPressedFragment() {
+        val fragments = fragmentManager!!.getFragments()
+        for (f in fragments) {
+            if (f != null && f is BaseFragment)
+                (f as BaseFragment).onBackPressedFragment()
+        }
+    }
+
+    fun onBackPressed(){
+        getActivity()!!.getSupportFragmentManager().popBackStack()
     }
 
 }

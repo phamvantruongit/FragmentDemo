@@ -24,15 +24,11 @@ class FragmentThree : BaseFragment()  {
             when (position) {
                 0 -> {
                     model.select(data = position)
-                    var fragmentTransaction: androidx.fragment.app.FragmentTransaction = fragmentManager!!.beginTransaction()
-                    fragmentTransaction.replace(R.id.container_three, FragmentDetail()).addToBackStack(null)
-                        .commit()
+                    FragmentUtils.replaceFragment(FragmentDetail() , fragmentManager!!,R.id.container_three)
                 }
                 1 -> {
                     model.select(position)
-                    var fragmentTransaction: androidx.fragment.app.FragmentTransaction = fragmentManager!!.beginTransaction()
-                    fragmentTransaction.replace(R.id.container_three, FragmentTwo()).addToBackStack(null)
-                        .commit()
+                    FragmentUtils.replaceFragment(FragmentTwo() , fragmentManager!!,R.id.container_three)
                 }
                 2 -> {
                     model.select(position)
